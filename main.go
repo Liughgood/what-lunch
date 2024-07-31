@@ -3,9 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -42,7 +42,7 @@ func main() {
 // loadLunchsFromFile 从指定的 JSON 文件中读取食物列表
 func loadLunchsFromFile(filename string) ([]Lunch, error) {
 	// 读取文件内容
-	data, err := ioutil.ReadFile(filename)
+	data, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
