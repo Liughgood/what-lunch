@@ -19,13 +19,21 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
+    <canvas id="myCanvas"></canvas>
     <button id="runButton">Start game</button>
 
     <script>
         const canvas = document.getElementById("myCanvas");
         const ctx = canvas.getContext("2d");
 
+        function resizeCanvas() {
+            canvas.width = window.innerWidth * 0.9; // 设置canvas宽度为窗口宽度的90%
+            canvas.height = window.innerHeight * 0.8; // 设置canvas高度为窗口高度的80%
+            // 在这里重新绘制canvas内容
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // 初始化画布大小
         const spead = 2;
         let interval = 0;
 
@@ -42,13 +50,13 @@
         const paddleWidth = 75;
         let paddleX = (canvas.width - paddleWidth) / 2;
 
-        const brickRowCount = 3;
-        const brickColumnCount = 5;
         const brickWidth = 75;
         const brickHeight = 20;
         const brickPadding = 10;
         const brickOffsetTop = 30;
         const brickOffsetLeft = 30;
+        const brickRowCount = 3;
+        const brickColumnCount = (canvas.width - brickOffsetLeft * 2) / (brickWidth + brickPadding);
 
         let score = 0;
 
