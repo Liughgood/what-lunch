@@ -52,6 +52,23 @@ func main() {
 			return
 		}
 	})
+
+	// 定义 /index 接口的处理函数
+    http.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
+        // 解析 index.html 模板文件
+        tmpl, err := template.ParseFiles("index.html")
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+
+        // 执行模板,将数据渲染到 HTML 页面
+        if err := tmpl.Execute(w, nil); err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+    })
+
 	// 在端口 8080 上启动 HTTP 服务器
 	fmt.Println("Starting server on port 9999...")
 	http.ListenAndServe(":9999", nil)
